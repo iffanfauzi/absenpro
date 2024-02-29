@@ -1,3 +1,16 @@
+<style>
+    body {
+        margin: 0;
+        padding: 0;
+    }
+
+    #map {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        width: 100%;
+    }
+</style>
 <div class="content-wrapper">
     <!-- Content Header (Page header) -->
     <section class="content-header">
@@ -134,6 +147,44 @@
                             <h4>Ini adalah Map</h4>
                             <p class="text-primary small">Klik tombol tap (seperti gambar target panah) dipojok kanan atas map, pastikan posisi anda dekat dengan lokasi kantor , GPS HP diaktifkan , ada jaringan internet/wifi dan menggunakan perangkat HP supaya bisa Check In</p>
                             <div id='map2' style='width: 100%; height: 75vh;'></div>
+                            <div id='map'></div>
+                            <script>
+                                var x = document.getElementById("map2");
+                                mapboxgl.accessToken = 'pk.eyJ1IjoianVuYWVkaWFsYnVraG9yaTE5NzkiLCJhIjoiY2t4Mnp4b3M1MXRvdTJucW9sNGk5dGg4cyJ9.2MbdxyrsNtJ9CJm8FbjA6A';
+                                var map = new mapboxgl.Map({
+                                    container: 'map2',
+                                    zoom: 12,
+                                    style: 'mapbox://styles/mapbox/streets-v11'
+                                });
+                                map.addControl(
+                                    new mapboxgl.GeolocateControl({
+                                        positionOptions: {
+                                            enableHighAccuracy: false
+                                        },
+                                        // When active the map will receive updates to the device's location as it changes.
+                                        trackUserLocation: false,
+                                        // Draw an arrow next to the location dot to indicate which direction the device is heading.
+                                        showUserHeading: false
+                                    })
+                                );
+
+
+                                map.addControl(new mapboxgl.NavigationControl())
+                                map.on('click', (e) => {
+                                    const longtitude = e.lngLat.lng
+                                    const lattitude = e.lngLat.lat
+                                })
+                                map.on('load', () => {
+                                    const mapContainerEl = document.getElementById('map2');
+                                    mapContainerEl.style.visibility = 'visible';
+                                });
+
+                                function showPosition(position) {
+                                    var x = document.getElementById("demo");
+                                    x.innerHTML = "Latitude: " + position.coords.latitude +
+                                        "<br />Longitude: " + position.coords.longitude;
+                                }
+                            </script>
                         </div>
                     </div>
                 </div>
