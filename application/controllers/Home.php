@@ -24,4 +24,14 @@ class Home extends CI_Controller
         );
         $this->load->view('template/wrapper', $data);
     }
+	public function absensi()
+    {
+        $title = "Absensi Karyawanfo";
+        $data = array(
+            'title' => $title,
+            'page' => 'admin/v_absensifo',
+            'link' => 'home/absensifo'
+        );
+        $this->load->view('template/wrapper', $data);
+    }
 }
