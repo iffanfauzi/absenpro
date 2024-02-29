@@ -4,27 +4,34 @@ defined('BASEPATH') or exit('No direct script access allowed');
 class Home extends CI_Controller
 {
 
-
-    public function __construct()
-    {
-        parent::__construct();
-
-        if ($this->session->userdata('level') == null) {
-            $this->session->set_flashdata('pesan_form', '<hr><div class="text-danger text-center"><b>Silahkan Login Terlebih Dahulu !</b></div><hr>');
-            echo '<script>window.location.href="' . base_url('login') . '"</script>';
-        }
-    }
-
     public function index()
     {
-        if ($this->session->userdata('level') != null) {
-            echo '<script>window.location.href="' . base_url(strtolower($this->session->userdata('level'))) . '/home"</script>';
-        }
+        $title = "dashboard";
+        $data = array(
+            'title' => $title,
+            'page' => 'admin/dashboard',
+            'link' => 'home'
+        );
+        $this->load->view('template/wrapper', $data);
     }
-
-    public function logout()
+    public function absensi()
     {
-        $this->session->sess_destroy();
-        echo '<script>window.location.href="' . base_url('login') . '"</script>';
+        $title = "Absensi Karyawan";
+        $data = array(
+            'title' => $title,
+            'page' => 'admin/v_absensi',
+            'link' => 'home/absensi'
+        );
+        $this->load->view('template/wrapper', $data);
+    }
+	public function absensi()
+    {
+        $title = "Absensi Karyawanfo";
+        $data = array(
+            'title' => $title,
+            'page' => 'admin/v_absensifo',
+            'link' => 'home/absensifo'
+        );
+        $this->load->view('template/wrapper', $data);
     }
 }
